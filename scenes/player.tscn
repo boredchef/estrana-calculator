@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://p58y02pwx2gq"]
+
+[ext_resource type="Script" uid="uid://bbxhnqheastgq" path="res://scripts/character_body_2d.gd" id="1_0e48y"]
+[ext_resource type="Texture2D" uid="uid://hmos2ojw361s" path="res://sprites/Sprite-0005.png" id="2_0hol4"]
+[ext_resource type="Texture2D" uid="uid://c457ip85yywe8" path="res://sprites/Sprite-0001.png" id="2_epypp"]
+[ext_resource type="Texture2D" uid="uid://c64iy7yr3cd3c" path="res://sprites/LittleGuyWalk-Sheet.png" id="4_q6r6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
+size = Vector2(11, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdubu"]
+atlas = ExtResource("2_0hol4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d21ai"]
+atlas = ExtResource("2_0hol4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rj586"]
+atlas = ExtResource("2_epypp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4d7sh"]
+atlas = ExtResource("4_q6r6c")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir8iy"]
+atlas = ExtResource("4_q6r6c")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oiiii"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdubu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d21ai")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rj586")
+}],
+"loop": 1,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4d7sh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir8iy")
+}],
+"loop": 1,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[node name="Player" type="Node2D" unique_id=1870273184]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=2122864086]
+script = ExtResource("1_0e48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=188208629]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_epypp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1212077977]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_oiiii")
+animation = &"Walk"
+autoplay = "Idle"
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1880418544]
+zoom = Vector2(3, 3)
+limit_enabled = false
+limit_top = -75
+limit_right = 126
+limit_bottom = 24
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0

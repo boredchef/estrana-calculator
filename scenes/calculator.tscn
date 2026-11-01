@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://btgaoes4vttxe"]
+
+[ext_resource type="Script" uid="uid://du7t647v1rg8y" path="res://scripts/calculator.gd" id="1_47tay"]
+
+[node name="calculator" type="Control" unique_id=225842722]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_47tay")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=245597591]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="display" type="Label" parent="VBoxContainer" unique_id=16118]
+layout_mode = 2
+horizontal_alignment = 2
+
+[node name="buttons" type="GridContainer" parent="VBoxContainer" unique_id=61181909]
+layout_mode = 2
+columns = 4
+
+[node name="b7" type="Button" parent="VBoxContainer/buttons" unique_id=1154871054]
+layout_mode = 2
+text = "7"
+
+[node name="b8" type="Button" parent="VBoxContainer/buttons" unique_id=911164536]
+layout_mode = 2
+text = "8"
+
+[node name="b9" type="Button" parent="VBoxContainer/buttons" unique_id=619990729]
+layout_mode = 2
+text = "9"
+
+[node name="divide" type="Button" parent="VBoxContainer/buttons" unique_id=1744547668]
+layout_mode = 2
+text = "/"
+
+[node name="b6" type="Button" parent="VBoxContainer/buttons" unique_id=1906357758]
+layout_mode = 2
+text = "6"
+
+[node name="b5" type="Button" parent="VBoxContainer/buttons" unique_id=1534693366]
+layout_mode = 2
+text = "5"
+
+[node name="b4" type="Button" parent="VBoxContainer/buttons" unique_id=2054504362]
+layout_mode = 2
+text = "4"
+
+[node name="mult" type="Button" parent="VBoxContainer/buttons" unique_id=1934071270]
+layout_mode = 2
+text = "*"
+
+[node name="b3" type="Button" parent="VBoxContainer/buttons" unique_id=778902333]
+layout_mode = 2
+text = "3"
+
+[node name="b2" type="Button" parent="VBoxContainer/buttons" unique_id=1893083167]
+layout_mode = 2
+text = "2"
+
+[node name="b1" type="Button" parent="VBoxContainer/buttons" unique_id=936654178]
+layout_mode = 2
+text = "1"
+
+[node name="plus" type="Button" parent="VBoxContainer/buttons" unique_id=267552944]
+layout_mode = 2
+text = "+"
+
+[node name="equals" type="Button" parent="VBoxContainer/buttons" unique_id=1500571269]
+layout_mode = 2
+text = "="
+
+[node name="b0" type="Button" parent="VBoxContainer/buttons" unique_id=1468434088]
+layout_mode = 2
+text = "0"
+
+[node name="negative" type="Button" parent="VBoxContainer/buttons" unique_id=262962809]
+layout_mode = 2
+text = "-/+"
+
+[node name="minus" type="Button" parent="VBoxContainer/buttons" unique_id=1569807610]
+layout_mode = 2
+text = "-"
+
+[connection signal="pressed" from="VBoxContainer/buttons/b7" to="." method="on_number_pressed" binds= [7]]
+[connection signal="pressed" from="VBoxContainer/buttons/b8" to="." method="on_number_pressed" binds= [8]]
+[connection signal="pressed" from="VBoxContainer/buttons/b9" to="." method="on_number_pressed" binds= [9]]
+[connection signal="pressed" from="VBoxContainer/buttons/divide" to="." method="on_symbol_pressed" binds= ["/"]]
+[connection signal="pressed" from="VBoxContainer/buttons/b6" to="." method="on_number_pressed" binds= [6]]
+[connection signal="pressed" from="VBoxContainer/buttons/b5" to="." method="on_number_pressed" binds= [5]]
+[connection signal="pressed" from="VBoxContainer/buttons/b4" to="." method="on_number_pressed" binds= [4]]
+[connection signal="pressed" from="VBoxContainer/buttons/mult" to="." method="on_symbol_pressed" binds= ["*"]]
+[connection signal="pressed" from="VBoxContainer/buttons/b3" to="." method="on_number_pressed" binds= [3]]
+[connection signal="pressed" from="VBoxContainer/buttons/b2" to="." method="on_number_pressed" binds= [2]]
+[connection signal="pressed" from="VBoxContainer/buttons/b1" to="." method="on_number_pressed" binds= [1]]
+[connection signal="pressed" from="VBoxContainer/buttons/plus" to="." method="on_symbol_pressed" binds= ["+"]]
+[connection signal="pressed" from="VBoxContainer/buttons/equals" to="." method="on_symbol_pressed" binds= [7]]
+[connection signal="pressed" from="VBoxContainer/buttons/b0" to="." method="on_number_pressed" binds= [0]]
+[connection signal="pressed" from="VBoxContainer/buttons/negative" to="." method="on_symbol_pressed" binds= ["."]]
+[connection signal="pressed" from="VBoxContainer/buttons/minus" to="." method="on_symbol_pressed" binds= ["-"]]

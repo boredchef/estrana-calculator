@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dvnanxa37dla5"]
+
+[ext_resource type="Script" uid="uid://bspyvuuybemhn" path="res://scripts/title.gd" id="1_4ignj"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8wryp"]
+
+[node name="Title" type="Node2D" unique_id=573237909]
+script = ExtResource("1_4ignj")
+
+[node name="Background" type="TextureRect" parent="." unique_id=648958702]
+clip_contents = true
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = SubResource("PlaceholderTexture2D_8wryp")
+
+[node name="Title" type="RichTextLabel" parent="." unique_id=787806665]
+offset_left = 114.0
+offset_top = 81.0
+offset_right = 1078.0
+offset_bottom = 219.0
+theme_override_font_sizes/normal_font_size = 108
+bbcode_enabled = true
+text = "[wave amp=180 freq=2]estrana calculator[/wave]"
+scroll_active = false
+
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=620042578]
+offset_left = 525.0
+offset_top = 342.0
+offset_right = 565.0
+offset_bottom = 382.0
+
+[node name="Start" type="Button" parent="Buttons" unique_id=325698752]
+layout_mode = 2
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 26
+text = "start"
+
+[node name="Quit" type="Button" parent="Buttons" unique_id=614762908]
+layout_mode = 2
+theme_override_constants/outline_size = 14
+theme_override_font_sizes/font_size = 26
+text = "quit"
+
+[connection signal="pressed" from="Buttons/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]
