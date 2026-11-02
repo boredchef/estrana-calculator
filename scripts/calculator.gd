@@ -37,8 +37,11 @@ func on_symbol_pressed(symbol:String) -> void:
 			do_math()
 			last_symbol = ""
 			display.text = str(total)
+		"percent":
+			var n = float(display.text) / 100
+			display.text = str(n)
 		"pm":
-			var n = int(display.text) * -1
+			var n = float(display.text) * -1.0
 			display.text = str(n)
 		"del":
 			if display.text.length() > 1:
