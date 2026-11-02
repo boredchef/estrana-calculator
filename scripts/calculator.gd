@@ -9,6 +9,7 @@ var has_number: bool = false
 var has_symbol: bool = false
 var last_symbol: String = ""
 var just_evaluated: bool = false
+var open_parens: int = 0
 
 func on_number_pressed(number:int) -> void:
 	print(number)
@@ -42,16 +43,26 @@ func on_symbol_pressed(symbol:String) -> void:
 			display.text = "0"
 			
 		"(": 
+			if has_number:
+				return
 			expression += "("
+			open_parens += 1
 			preview_text += symbol
 			has_symbol = false
 		")":
+			if open_parens == 0:
+				return
+			open_parens -= 1
 			commit_number()
 			expression += ")"
 			preview_text += symbol
+			display.text = "0"
 			has_symbol = false
 		"=":
 			commit_number()
+			expression += ")".repeat(open_parens)
+			if has_symbol:
+				expression = expression.left(expression.length() - 1)
 			preview_text = ""
 			var res = format_result(do_math(expression))
 			
@@ -60,6 +71,7 @@ func on_symbol_pressed(symbol:String) -> void:
 			expression = ""
 			just_evaluated = true
 			has_symbol = false
+			open_parens = 0
 		"percent":
 			var n = float(display.text) / 100
 			display.text = format_result(n)
@@ -80,6 +92,7 @@ func on_symbol_pressed(symbol:String) -> void:
 			has_number = false
 			has_symbol = false
 			just_evaluated = false
+			open_parens = 0
 			expression = ""
 			display.text = "0"
 			preview_text = ""
