@@ -6,6 +6,8 @@ extends Control
 var expression: String = ""
 var preview_text: String = ""
 var has_number: bool = false
+var has_symbol: bool = false
+var last_symbol: String = ""
 var just_evaluated: bool = false
 
 func on_number_pressed(number:int) -> void:
@@ -14,6 +16,7 @@ func on_number_pressed(number:int) -> void:
 		display.text = "0"
 		just_evaluated = false
 		preview_text = ""
+	has_symbol = false
 	var digit_count = display.text.replace(".", "").length()
 	if digit_count >= 8:
 		return
@@ -28,25 +31,35 @@ func on_symbol_pressed(symbol:String) -> void:
 	match(symbol):
 		"+", "-", "*", "/":
 			just_evaluated = false
-			commit_number()
+			if has_symbol:
+				expression = expression.left(expression.length() - 1)
+				preview_text = preview_text.left(preview_text.length() - 1)
+			else: 
+				commit_number()
+			has_symbol = true
 			expression += symbol
-			display.text = "0"
 			preview_text += symbol
+			display.text = "0"
+			
 		"(": 
 			expression += "("
 			preview_text += symbol
+			has_symbol = false
 		")":
 			commit_number()
 			expression += ")"
 			preview_text += symbol
+			has_symbol = false
 		"=":
 			commit_number()
+			preview_text = ""
 			var res = format_result(do_math(expression))
 			
 			display.text = res
 			has_number = res != "error"
 			expression = ""
 			just_evaluated = true
+			has_symbol = false
 		"percent":
 			var n = float(display.text) / 100
 			display.text = format_result(n)
@@ -65,6 +78,7 @@ func on_symbol_pressed(symbol:String) -> void:
 			display.text = "0"
 		"ac":
 			has_number = false
+			has_symbol = false
 			just_evaluated = false
 			expression = ""
 			display.text = "0"
@@ -77,6 +91,7 @@ func on_symbol_pressed(symbol:String) -> void:
 			if "." not in display.text: 
 				display.text += "."
 				has_number = true
+				has_symbol = false
 			else:
 				return
 	update_preview()
