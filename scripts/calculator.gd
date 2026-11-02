@@ -2,8 +2,10 @@ extends Control
 
 @onready var display: Label = $VBoxContainer/display
 
-var total = 0
-var last_symbol = ""
+#var total = 0
+#var last_symbol = ""
+var expression = ""
+var has_number = false
 
 func _ready() -> void:
 	pass # Replace with function body.
@@ -17,26 +19,26 @@ func on_number_pressed(number:int) -> void:
 		display.text += str(number)
 	else:
 		display.text = str(number)
+	has_number = true
 	
 
 func on_symbol_pressed(symbol:String) -> void:
 	match(symbol):
-		"+":
-			do_math()
-			last_symbol = symbol
-		"-":
-			do_math()
-			last_symbol = symbol
-		"*":
-			do_math()
-			last_symbol = symbol
-		"/":
-			do_math()
-			last_symbol = symbol
+		"+", "-", "*", "/":
+			commit_number()
+			expression += symbol
+			display.text = "0"
+		"(": 
+			expression += "("
+		")": 
+			expression += ")"
 		"=":
-			do_math()
-			last_symbol = ""
-			display.text = str(total)
+			commit_number()
+			var res = format_result(do_math(expression))
+			
+			display.text = res
+			has_number = true
+			expression = ""
 		"percent":
 			var n = float(display.text) / 100
 			display.text = str(n)
@@ -52,31 +54,39 @@ func on_symbol_pressed(symbol:String) -> void:
 			display.text = "0"
 		"ac":
 			display.text = "0"
-			total = 0
-			last_symbol = ""
+			expression = ""
 		".":
 			if "." not in display.text: 
 				display.text += "."
+				has_number = true
 			else:
-				pass
+				return
 		
 			
 	print(symbol)
 
-func do_math():
-	var n = float(display.text)
-	 
-	match(last_symbol):
-		"":
-			total = n
-		"+":
-			total += n
-		"-":
-			total -= n
-		"*":
-			total *= n
-		"/":
-			total /= n
-	display.text = "0"
-	print("total " +str(total))
-	
+func commit_number() -> void:
+	if has_number:
+		expression += str(float(display.text))
+		has_number = false
+		
+func format_result(result) -> String:
+	if result == null:
+		return "error"
+	if is_inf(result) or is_nan(result):
+		return "error"
+	if result == floorf(result):
+		return str(int(result))
+	return str(result)
+
+func do_math(formula: String):
+	var expr = Expression.new()
+	print(formula)
+	var err = expr.parse(formula)
+	if err != OK:
+		push_error(expr.get_error_text())
+		return null
+	var result = expr.execute()
+	if expr.has_execute_failed():
+		return null
+	return result
