@@ -75,12 +75,3 @@ z_index = 2
 sprite_frames = SubResource("SpriteFrames_oiiii")
 animation = &"Walk"
 autoplay = "Idle"
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1880418544]
-zoom = Vector2(3, 3)
-limit_enabled = false
-limit_top = -75
-limit_right = 126
-limit_bottom = 24
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0

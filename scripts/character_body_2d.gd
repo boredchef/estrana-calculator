@@ -8,6 +8,11 @@ const GRAV_MULTI = 1.1
 const DOWN_CONST = 2.25
 var down_multi = false
 
+@onready var calculator: Control = $"../../calculator"
+
+func _ready(): 
+	calculator.visible = false
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -53,3 +58,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("Toggle Calculator"):
+		calculator.visible = not calculator.visible

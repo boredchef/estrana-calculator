@@ -1,106 +1,244 @@
 [gd_scene format=3 uid="uid://btgaoes4vttxe"]
 
 [ext_resource type="Script" uid="uid://du7t647v1rg8y" path="res://scripts/calculator.gd" id="1_47tay"]
+[ext_resource type="FontFile" uid="uid://bl8hqnuwtbax8" path="res://augiepixel.ttf" id="1_j8sg6"]
+[ext_resource type="Texture2D" uid="uid://bjlwnqk7p05rs" path="res://sprites/button.png" id="2_j8sg6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j8sg6"]
+texture = ExtResource("2_j8sg6")
+
+[sub_resource type="Theme" id="Theme_47tay"]
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("1_j8sg6")
+Button/styles/normal = SubResource("StyleBoxTexture_j8sg6")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_864p1"]
+bg_color = Color(0.9843137, 0.9843137, 0.9843137, 1)
+
+[sub_resource type="Theme" id="Theme_sio27"]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_j8sg6")
+Label/styles/normal = SubResource("StyleBoxFlat_864p1")
 
 [node name="calculator" type="Control" unique_id=225842722]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = -3.0
+offset_right = -995.0
+offset_bottom = -451.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_47tay")
 script = ExtResource("1_47tay")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=245597591]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 125.0
+offset_bottom = 198.0
 
 [node name="display" type="Label" parent="VBoxContainer" unique_id=16118]
 layout_mode = 2
+theme = SubResource("Theme_sio27")
 horizontal_alignment = 2
 
 [node name="buttons" type="GridContainer" parent="VBoxContainer" unique_id=61181909]
 layout_mode = 2
-columns = 4
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+columns = 5
+
+[node name="del" type="Button" parent="VBoxContainer/buttons" unique_id=1370915966]
+layout_mode = 2
+text = "<-"
+
+[node name="ce" type="Button" parent="VBoxContainer/buttons" unique_id=698987123]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+text = "CE"
+
+[node name="ac" type="Button" parent="VBoxContainer/buttons" unique_id=1629914817]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+text = "C"
+
+[node name="pm" type="Button" parent="VBoxContainer/buttons" unique_id=119504641]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+text = "+/-"
+
+[node name="percent" type="Button" parent="VBoxContainer/buttons" unique_id=2136509397]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+text = "%"
 
 [node name="b7" type="Button" parent="VBoxContainer/buttons" unique_id=1154871054]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
 text = "7"
 
 [node name="b8" type="Button" parent="VBoxContainer/buttons" unique_id=911164536]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
 text = "8"
 
 [node name="b9" type="Button" parent="VBoxContainer/buttons" unique_id=619990729]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
 text = "9"
 
-[node name="divide" type="Button" parent="VBoxContainer/buttons" unique_id=1744547668]
+[node name="divide" type="Button" parent="VBoxContainer/buttons" unique_id=1984710111]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
 text = "/"
 
-[node name="b6" type="Button" parent="VBoxContainer/buttons" unique_id=1906357758]
+[node name="open paranthesis" type="Button" parent="VBoxContainer/buttons" unique_id=470648480]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-text = "6"
-
-[node name="b5" type="Button" parent="VBoxContainer/buttons" unique_id=1534693366]
-layout_mode = 2
-text = "5"
+size_flags_vertical = 3
+text = "(
+"
 
 [node name="b4" type="Button" parent="VBoxContainer/buttons" unique_id=2054504362]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
 text = "4"
 
-[node name="mult" type="Button" parent="VBoxContainer/buttons" unique_id=1934071270]
+[node name="b5" type="Button" parent="VBoxContainer/buttons" unique_id=1534693366]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+text = "5"
+
+[node name="b6" type="Button" parent="VBoxContainer/buttons" unique_id=1906357758]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+text = "6"
+
+[node name="multiply" type="Button" parent="VBoxContainer/buttons" unique_id=1744547668]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
 text = "*"
 
-[node name="b3" type="Button" parent="VBoxContainer/buttons" unique_id=778902333]
+[node name="close paranthesis" type="Button" parent="VBoxContainer/buttons" unique_id=1106059154]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-text = "3"
+size_flags_vertical = 3
+text = ")"
 
-[node name="b2" type="Button" parent="VBoxContainer/buttons" unique_id=1893083167]
+[node name="bottom" type="HBoxContainer" parent="VBoxContainer" unique_id=1249007676]
 layout_mode = 2
-text = "2"
 
-[node name="b1" type="Button" parent="VBoxContainer/buttons" unique_id=936654178]
+[node name="left" type="VBoxContainer" parent="VBoxContainer/bottom" unique_id=660746852]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="row_a" type="HBoxContainer" parent="VBoxContainer/bottom/left" unique_id=627285534]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="b1" type="Button" parent="VBoxContainer/bottom/left/row_a" unique_id=936654178]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
 text = "1"
 
-[node name="plus" type="Button" parent="VBoxContainer/buttons" unique_id=267552944]
+[node name="b2" type="Button" parent="VBoxContainer/bottom/left/row_a" unique_id=1893083167]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+text = "2"
+
+[node name="b3" type="Button" parent="VBoxContainer/bottom/left/row_a" unique_id=778902333]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+text = "3"
+
+[node name="minus" type="Button" parent="VBoxContainer/bottom/left/row_a" unique_id=1934071270]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+text = "-"
+
+[node name="row_b" type="HBoxContainer" parent="VBoxContainer/bottom/left" unique_id=621236688]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="b0" type="Button" parent="VBoxContainer/bottom/left/row_b" unique_id=1468434088]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+text = "0"
+
+[node name="decimal" type="Button" parent="VBoxContainer/bottom/left/row_b" unique_id=262962809]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "."
+
+[node name="plus" type="Button" parent="VBoxContainer/bottom/left/row_b" unique_id=267552944]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 text = "+"
 
-[node name="equals" type="Button" parent="VBoxContainer/buttons" unique_id=1500571269]
+[node name="equals" type="Button" parent="VBoxContainer/bottom" unique_id=1569807610]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "="
 
-[node name="b0" type="Button" parent="VBoxContainer/buttons" unique_id=1468434088]
-layout_mode = 2
-text = "0"
-
-[node name="negative" type="Button" parent="VBoxContainer/buttons" unique_id=262962809]
-layout_mode = 2
-text = "-/+"
-
-[node name="minus" type="Button" parent="VBoxContainer/buttons" unique_id=1569807610]
-layout_mode = 2
-text = "-"
-
+[connection signal="pressed" from="VBoxContainer/buttons/del" to="." method="on_symbol_pressed" binds= ["del"]]
+[connection signal="pressed" from="VBoxContainer/buttons/ce" to="." method="on_symbol_pressed" binds= ["ce"]]
+[connection signal="pressed" from="VBoxContainer/buttons/ac" to="." method="on_symbol_pressed" binds= ["ac"]]
+[connection signal="pressed" from="VBoxContainer/buttons/pm" to="." method="on_symbol_pressed" binds= ["pm"]]
+[connection signal="pressed" from="VBoxContainer/buttons/percent" to="." method="on_symbol_pressed" binds= ["percent"]]
 [connection signal="pressed" from="VBoxContainer/buttons/b7" to="." method="on_number_pressed" binds= [7]]
 [connection signal="pressed" from="VBoxContainer/buttons/b8" to="." method="on_number_pressed" binds= [8]]
 [connection signal="pressed" from="VBoxContainer/buttons/b9" to="." method="on_number_pressed" binds= [9]]
 [connection signal="pressed" from="VBoxContainer/buttons/divide" to="." method="on_symbol_pressed" binds= ["/"]]
-[connection signal="pressed" from="VBoxContainer/buttons/b6" to="." method="on_number_pressed" binds= [6]]
-[connection signal="pressed" from="VBoxContainer/buttons/b5" to="." method="on_number_pressed" binds= [5]]
+[connection signal="pressed" from="VBoxContainer/buttons/open paranthesis" to="." method="on_symbol_pressed" binds= ["("]]
 [connection signal="pressed" from="VBoxContainer/buttons/b4" to="." method="on_number_pressed" binds= [4]]
-[connection signal="pressed" from="VBoxContainer/buttons/mult" to="." method="on_symbol_pressed" binds= ["*"]]
-[connection signal="pressed" from="VBoxContainer/buttons/b3" to="." method="on_number_pressed" binds= [3]]
-[connection signal="pressed" from="VBoxContainer/buttons/b2" to="." method="on_number_pressed" binds= [2]]
-[connection signal="pressed" from="VBoxContainer/buttons/b1" to="." method="on_number_pressed" binds= [1]]
-[connection signal="pressed" from="VBoxContainer/buttons/plus" to="." method="on_symbol_pressed" binds= ["+"]]
-[connection signal="pressed" from="VBoxContainer/buttons/equals" to="." method="on_symbol_pressed" binds= [7]]
-[connection signal="pressed" from="VBoxContainer/buttons/b0" to="." method="on_number_pressed" binds= [0]]
-[connection signal="pressed" from="VBoxContainer/buttons/negative" to="." method="on_symbol_pressed" binds= ["."]]
-[connection signal="pressed" from="VBoxContainer/buttons/minus" to="." method="on_symbol_pressed" binds= ["-"]]
+[connection signal="pressed" from="VBoxContainer/buttons/b5" to="." method="on_number_pressed" binds= [5]]
+[connection signal="pressed" from="VBoxContainer/buttons/b6" to="." method="on_number_pressed" binds= [6]]
+[connection signal="pressed" from="VBoxContainer/buttons/multiply" to="." method="on_symbol_pressed" binds= ["*"]]
+[connection signal="pressed" from="VBoxContainer/buttons/close paranthesis" to="." method="on_symbol_pressed" binds= [")"]]
+[connection signal="pressed" from="VBoxContainer/bottom/left/row_a/b1" to="." method="on_number_pressed" binds= [1]]
+[connection signal="pressed" from="VBoxContainer/bottom/left/row_a/b2" to="." method="on_number_pressed" binds= [2]]
+[connection signal="pressed" from="VBoxContainer/bottom/left/row_a/b3" to="." method="on_number_pressed" binds= [3]]
+[connection signal="pressed" from="VBoxContainer/bottom/left/row_a/minus" to="." method="on_symbol_pressed" binds= ["-"]]
+[connection signal="pressed" from="VBoxContainer/bottom/left/row_b/b0" to="." method="on_number_pressed" binds= [0]]
+[connection signal="pressed" from="VBoxContainer/bottom/left/row_b/decimal" to="." method="on_symbol_pressed" binds= ["."]]
+[connection signal="pressed" from="VBoxContainer/bottom/left/row_b/plus" to="." method="on_symbol_pressed" binds= ["+"]]
+[connection signal="pressed" from="VBoxContainer/bottom/equals" to="." method="on_symbol_pressed" binds= ["="]]
