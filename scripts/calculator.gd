@@ -4,15 +4,17 @@ extends Control
 @onready var preview: Label = $VBoxContainer/preview
 
 var expression: String = ""
+var preview_text: String = ""
 var has_number: bool = false
 var just_evaluated: bool = false
 
 func on_number_pressed(number:int) -> void:
 	print(number)
-	var digit_count = display.text.replace(".", "").length()
 	if just_evaluated:
 		display.text = "0"
 		just_evaluated = false
+		preview_text = ""
+	var digit_count = display.text.replace(".", "").length()
 	if digit_count >= 8:
 		return
 	if display.text != "0":
@@ -20,7 +22,7 @@ func on_number_pressed(number:int) -> void:
 	else:
 		display.text = str(number)
 	has_number = true
-	preview.text = expression
+	update_preview()
 
 func on_symbol_pressed(symbol:String) -> void:
 	match(symbol):
@@ -29,11 +31,14 @@ func on_symbol_pressed(symbol:String) -> void:
 			commit_number()
 			expression += symbol
 			display.text = "0"
+			preview_text += symbol
 		"(": 
 			expression += "("
+			preview_text += symbol
 		")":
 			commit_number()
 			expression += ")"
+			preview_text += symbol
 		"=":
 			commit_number()
 			var res = format_result(do_math(expression))
@@ -61,20 +66,25 @@ func on_symbol_pressed(symbol:String) -> void:
 		"ac":
 			has_number = false
 			just_evaluated = false
-			display.text = "0"
 			expression = ""
+			display.text = "0"
+			preview_text = ""
 		".":
-			just_evaluated = false
+			if just_evaluated:
+				display.text = "0"
+				just_evaluated = false
+				preview_text = ""
 			if "." not in display.text: 
 				display.text += "."
 				has_number = true
 			else:
 				return
-	preview.text = expression
+	update_preview()
 
 func commit_number() -> void:
 	if has_number:
 		expression += str(float(display.text))
+		preview_text += display.text
 		has_number = false
 		
 func format_result(result) -> String:
@@ -85,6 +95,10 @@ func format_result(result) -> String:
 	if result == floorf(result):
 		return str(int(result))
 	return str(result)
+
+func update_preview():
+	var pending: String = display.text if has_number and not just_evaluated else ""
+	preview.text = preview_text + pending
 
 func do_math(formula: String):
 	var expr = Expression.new()
