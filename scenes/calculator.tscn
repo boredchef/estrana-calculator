@@ -12,6 +12,16 @@ Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_j8sg6")
 Button/styles/normal = SubResource("StyleBoxTexture_j8sg6")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1lm5o"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+
+[sub_resource type="Theme" id="Theme_8wryp"]
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_j8sg6")
+Label/styles/normal = SubResource("StyleBoxFlat_1lm5o")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_864p1"]
 content_margin_left = 5.0
 content_margin_top = 5.0
@@ -43,6 +53,11 @@ script = ExtResource("1_47tay")
 layout_mode = 0
 offset_right = 125.0
 offset_bottom = 198.0
+
+[node name="preview" type="Label" parent="VBoxContainer" unique_id=822050488]
+layout_mode = 2
+theme = SubResource("Theme_8wryp")
+horizontal_alignment = 2
 
 [node name="display" type="Label" parent="VBoxContainer" unique_id=16118]
 layout_mode = 2
