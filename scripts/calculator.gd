@@ -7,7 +7,6 @@ var expression: String = ""
 var preview_text: String = ""
 var has_number: bool = false
 var has_symbol: bool = false
-var last_symbol: String = ""
 var just_evaluated: bool = false
 var open_parens: int = 0
 
@@ -39,10 +38,13 @@ func on_symbol_pressed(symbol:String) -> void:
 				commit_number()
 			has_symbol = true
 			expression += symbol
+			if symbol == "*":
+				symbol = "x"
 			preview_text += symbol
 			display.text = "0"
 			
-		"(": 
+		"(":
+			just_evaluated = false 
 			if has_number:
 				return
 			expression += "("
@@ -60,10 +62,11 @@ func on_symbol_pressed(symbol:String) -> void:
 			has_symbol = false
 		"=":
 			commit_number()
-			expression += ")".repeat(open_parens)
 			if has_symbol:
 				expression = expression.left(expression.length() - 1)
-			preview_text = ""
+				preview_text = preview_text.left(preview_text.length() - 1)
+			expression += ")".repeat(open_parens)
+			var finished: String = preview_text
 			var res = format_result(do_math(expression))
 			
 			display.text = res
@@ -72,6 +75,9 @@ func on_symbol_pressed(symbol:String) -> void:
 			just_evaluated = true
 			has_symbol = false
 			open_parens = 0
+			preview_text = ""
+			preview.text = finished
+			return
 		"percent":
 			var n = float(display.text) / 100
 			display.text = format_result(n)
@@ -125,7 +131,9 @@ func format_result(result) -> String:
 	return str(result)
 
 func update_preview():
-	var pending: String = display.text if has_number and not just_evaluated else ""
+	if just_evaluated:
+		return
+	var pending: String = display.text if has_number else ""
 	preview.text = preview_text + pending
 
 func do_math(formula: String):

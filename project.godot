@@ -21,6 +21,8 @@ Global="*uid://bj0od1o3c28cc"
 
 [display]
 
+window/size/viewport_width=266
+window/size/viewport_height=339
 window/stretch/mode="viewport"
 
 [editor_plugins]

@@ -1,45 +1,88 @@
 [gd_scene format=3 uid="uid://dvnanxa37dla5"]
 
 [ext_resource type="Script" uid="uid://bspyvuuybemhn" path="res://scripts/title.gd" id="1_4ignj"]
+[ext_resource type="FontFile" uid="uid://bl8hqnuwtbax8" path="res://augiepixel.ttf" id="2_p6dhs"]
+[ext_resource type="Texture2D" uid="uid://cai808tkwnjik" path="res://sprites/LittleMa.png" id="3_pyl7j"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8wryp"]
+
+[sub_resource type="Theme" id="Theme_4ignj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3w7a"]
+atlas = ExtResource("3_pyl7j")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rr2b"]
+atlas = ExtResource("3_pyl7j")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1lm5o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3w7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rr2b")
+}],
+"loop": 1,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="Title" type="Node2D" unique_id=573237909]
 script = ExtResource("1_4ignj")
 
 [node name="Background" type="TextureRect" parent="." unique_id=648958702]
 clip_contents = true
-offset_right = 1152.0
-offset_bottom = 648.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -0.5
+offset_right = 266.0
+offset_bottom = 339.0
+grow_horizontal = 2
 texture = SubResource("PlaceholderTexture2D_8wryp")
 
 [node name="Title" type="RichTextLabel" parent="." unique_id=787806665]
-offset_left = 114.0
-offset_top = 81.0
-offset_right = 1078.0
-offset_bottom = 219.0
-theme_override_font_sizes/normal_font_size = 108
+offset_left = 11.0
+offset_top = 57.0
+offset_right = 258.0
+offset_bottom = 81.0
+theme = SubResource("Theme_4ignj")
+theme_override_fonts/normal_font = ExtResource("2_p6dhs")
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
-text = "[wave amp=180 freq=2]estrana calculator[/wave]"
+text = "[wave amp=20 freq=2]estrana calculator[/wave]"
 scroll_active = false
 
 [node name="Buttons" type="VBoxContainer" parent="." unique_id=620042578]
-offset_left = 525.0
-offset_top = 342.0
-offset_right = 565.0
-offset_bottom = 382.0
+offset_left = 101.0
+offset_top = 102.0
+offset_right = 169.0
+offset_bottom = 194.0
 
 [node name="Start" type="Button" parent="Buttons" unique_id=325698752]
 layout_mode = 2
 theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("2_p6dhs")
 theme_override_font_sizes/font_size = 26
 text = "start"
 
 [node name="Quit" type="Button" parent="Buttons" unique_id=614762908]
 layout_mode = 2
 theme_override_constants/outline_size = 14
+theme_override_fonts/font = ExtResource("2_p6dhs")
 theme_override_font_sizes/font_size = 26
 text = "quit"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1501398870]
+position = Vector2(136, 281.00003)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_1lm5o")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame = 1
+frame_progress = 1.0
 
 [connection signal="pressed" from="Buttons/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Buttons/Quit" to="." method="_on_quit_pressed"]
